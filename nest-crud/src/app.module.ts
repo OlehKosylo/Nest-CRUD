@@ -4,12 +4,12 @@ import { APP_FILTER } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 
 import { CinemaModule } from './cinema/cinema.module';
+import { MovieModule } from './movie/movie.module';
 import {
   configurationModuleOptions,
   typeORMConfigurations,
   HttpExceptionFilter,
 } from './shared';
-import { MovieModule } from './movie/movie.module';
 
 @Module({
   imports: [
