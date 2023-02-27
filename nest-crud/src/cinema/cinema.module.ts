@@ -15,6 +15,7 @@ import { Cinema } from './entities';
   imports: [TypeOrmModule.forFeature([Cinema])],
   controllers: [CinemaController],
   providers: [CinemaService],
+  exports: [CinemaService],
 })
 export class CinemaModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

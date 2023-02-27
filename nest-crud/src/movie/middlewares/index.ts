@@ -1,1 +1,1 @@
-export * from './validate-update-movie-input.middleware';
+export * from './validate-movie-input.middleware';

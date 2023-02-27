@@ -5,3 +5,4 @@
 # Local
 .env
 dist
+node_modules

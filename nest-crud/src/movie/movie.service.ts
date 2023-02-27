@@ -3,8 +3,8 @@ import { Repository, UpdateResult } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 
 import { CreateMovieDto, UpdateMovieDto } from './dto';
+import { mapDtoToEntity } from './mappers';
 import { Movie } from './entities';
-import { Cinema } from '../cinema/entities';
 
 @Injectable()
 export class MovieService {
@@ -13,8 +13,8 @@ export class MovieService {
     private readonly movieRepository: Repository<Movie>,
   ) {}
 
-  async create(createMovieDto: CreateMovieDto): Promise<Movie> {
-    const movie: Movie = this.movieRepository.create(createMovieDto);
+  async create(data: CreateMovieDto): Promise<Movie> {
+    const movie: Movie = this.movieRepository.create(mapDtoToEntity(data));
 
     return this.movieRepository.save(movie);
   }
@@ -36,11 +36,10 @@ export class MovieService {
     return this.movieRepository.findOneBy({ name });
   }
 
-  async updateById(
-    id: string,
-    updateMovieDto: UpdateMovieDto,
-  ): Promise<UpdateResult> {
-    return this.movieRepository.update({ id }, updateMovieDto);
+  async updateById(id: string, data: UpdateMovieDto): Promise<UpdateResult> {
+    const movie: Partial<Movie> = mapDtoToEntity(data);
+
+    return this.movieRepository.update({ id }, movie);
   }
 
   async removeById(id: string): Promise<void> {
